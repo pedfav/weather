@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Data import Data
 import Adafruit_DHT as DHT
 import RPi.GPIO as GPIO
 import time
@@ -26,11 +27,12 @@ with app.app_context():
 
             if umidade is not None and temperatura is not None:
                 GPIO.output(24, GPIO.HIGH)
-                print(str(datetime.datetime.now()) + ' - Temperatura={0:0.1f}* Umidade={1:0.1f}%'.format(temperatura, umidade))
-                mycol.insert_one({'temperatura':temperatura, 'umidade':umidade, 'Hora':str(datetime.datetime.now())})
+                data = Data(temperatura, umidade)
+                data.to_string()
+                mycol.insert_one(data.to_json())
                 time.sleep(1)
 
                 GPIO.output(24, GPIO.LOW)
             else:
                 print('Não foi possível obter nenhuma leitura')
-        time.sleep(0.05)
+        time.sleep(2)
