@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import Adafruit_DHT
+import time
 from datetime import datetime
 
 
