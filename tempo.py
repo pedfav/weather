@@ -12,7 +12,7 @@ while True:
   if humidity is not None and temperature is not None:
     now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-    print(f"{now} - Temperature={temperature} - Humidity={humidity}")
+    print(f'{now} - Temperature={temperature} - Humidity={humidity}')
   else:
     print("Fail to get data from dht22")
 
