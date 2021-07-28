@@ -13,8 +13,8 @@ while True:
   if humidity is not None and temperature is not None:
     now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-    print(temperature)
+    print(f"Date={now}")
   else:
     print("Fail to get data from dht22")
 
-  time.sleep(10)
+  time.sleep(2)
