@@ -2,13 +2,11 @@
 import Adafruit_DHT
 import time
 from datetime import datetime
-
 import RPi.GPIO as GPIO
-
 from RPLCD.gpio import CharLCD
 
-lcd = CharLCD(pin_rs=19, pin_e=16, pin_rw=None, pins_data=[23, 17, 21, 22], numbering_mode=GPIO.BOARD, cols=16, rows=2, dotsize=8)
-
+GPIO.setwarnings(False)
+lcd = CharLCD(pin_rs=19, pin_rw=None, pin_e=16, pins_data=[21,18,23,24], numbering_mode=GPIO.BOARD, cols=16, rows=2, dotsize=8)
 
 DHT_SENSOR = Adafruit_DHT.DHT22
 DHT_PIN = 4
@@ -18,13 +16,13 @@ while True:
 
   if humidity is not None and temperature is not None:
     lcd.clear()
-    now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    now = datetime.now().strftime("%H:%M:%S")
 
-    lcd.write_string(f"Date={now} - Temperature={temperature} - Humidity={humidity}")
-    print(f"Date={now} - Temperature={temperature} - Humidity={humidity}")
+    lcd.write_string(f"Time={now}")
+    lcd.cursor_pos=(1,0)
+    lcd.write_string(f"T={round(temperature, 2)} - H={round(humidity, 2)}")
+    print(f"Time={now} - Temperature={round(temperature, 2)} - Humidity={round(humidity, 2)}")
 
-    lcd.close() 
-    GPIO.cleanup()
   else:
     print("Fail to get data from dht22")
 
