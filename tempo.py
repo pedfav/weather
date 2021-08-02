@@ -49,7 +49,7 @@ while True:
     data = response.json()
     btc = data["bpi"]["USD"]["rate"]
     lcd.write_string(f"BTC={btc}")
-    print(f"BTC={btc}")
+    print(f"₿={btc}")
 
   else:
     print("Fail to get data from dht22")
